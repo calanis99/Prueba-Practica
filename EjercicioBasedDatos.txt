@@ -1,0 +1,39 @@
+4. Genere la sintaxis para crear una tabla llamada “Oficinas” 
+
+CREATE TABLE Oficinas (
+    ID INT NOT NULL UNIQUE,
+    Nombre VARCHAR(255) NOT NULL,
+    Direccion VARCHAR(255) NOT NULL,
+    Ciudad VARCHAR(255) NOT NULL,
+    Estado VARCHAR(255) NOT NULL,
+    Pais VARCHAR(255) NOT NULL,
+    Division INT NOT NULL
+);
+
+5. Stored Procedure
+
+CREATE PROCEDURE InsertOrUpdateOficina (
+    @accion INT,
+    @id INT,
+    @nombre VARCHAR(255),
+    @direccion VARCHAR(255),
+    @ciudad VARCHAR(255),
+    @estado VARCHAR(255),
+    @pais VARCHAR(255),
+    @division INT
+)
+AS
+BEGIN
+    IF @accion = 1
+    BEGIN
+        INSERT INTO Oficinas (ID, Nombre, Direccion, Ciudad, Estado, Pais, Division)
+        VALUES (@id, @nombre, @direccion, @ciudad, @estado, @pais, @division);
+    END
+    ELSE IF @accion = 0
+    BEGIN
+        UPDATE Oficinas
+        SET Direccion = @direccion
+        WHERE ID = @id;
+    END
+END;
+
